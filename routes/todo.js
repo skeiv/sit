@@ -6,7 +6,7 @@ const pgp = require("pg-promise")(/*options*/);
 const db = pgp("postgres://samoylovdb:123@database:5432/todo");
 
 router.get('/', function (req, res, next) {
-    const data = req.body
+    const data = req.query
     if (isNotEmpty(data.user_id)) {
         db.any('SELECT * FROM tasks WHERE user_id=$1', [data.user_id])
             .then(tasks => {
